@@ -48,7 +48,7 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void initialBalanceDontShouldNegative() { // отрицательный начальный баланс - БАГ
+    public void initialBalanceDontShouldNegative() { // отрицательный начальный баланс - составлен баг репорт
         Assertions.assertThrows(java.lang.IllegalArgumentException.class, () -> {
             new SavingAccount(-1_000, 1_000, 10_000, 5);
         });
@@ -67,15 +67,15 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void paymentShouldNotThrough() { // сумма оплаты больше баланса - БАГ
+    public void paymentShouldNotThrough() { // сумма оплаты больше баланса, после оплаты баланс меньше минимального баланса - БАГ
         SavingAccount account = new SavingAccount(
-                2_000,
+                3_000,
                 1_000,
                 10_000,
                 5
         );
         account.pay(3_000);
-        Assertions.assertEquals(2_000, account.getBalance());
+        Assertions.assertEquals(3_000, account.getBalance());
     }
 
     @Test
