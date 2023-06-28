@@ -6,21 +6,21 @@ import org.junit.jupiter.api.Test;
 public class SavingAccountTest {
 
     @Test
-    public void dontShouldLessMinimumBalance() { // начальный баланс меньше минимального баланса - БАГ
+    public void dontShouldLessMinimumBalance() { // начальный баланс меньше минимального баланса - составлен баг репорт
         Assertions.assertThrows(java.lang.IllegalArgumentException.class, () -> {
             new SavingAccount(2_000, 5_000, 10_000, 5);
         });
     }
 
     @Test
-    public void dontShouldExceedMaxBalance() { // начальный баланс больше максимального баланса - БАГ
+    public void dontShouldExceedMaxBalance() { // начальный баланс больше максимального баланса - составлен баг репорт
         Assertions.assertThrows(java.lang.IllegalArgumentException.class, () -> {
             new SavingAccount(100_000, 1_000, 10_000, 5);
         });
     }
 
     @Test
-    public void minBalanceDontShouldGreaterMaxBalance() { // минимальный баланс больше максимального - БАГ
+    public void minBalanceDontShouldGreaterMaxBalance() { // минимальный баланс больше максимального - составлен баг репорт
         Assertions.assertThrows(java.lang.IllegalArgumentException.class, () -> {
             new SavingAccount(2_000, 50_000, 10_000, 5);
         });
@@ -34,14 +34,14 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void minBalanceDontShouldNegative() { // отрицательный минимальный баланс - БАГ
+    public void minBalanceDontShouldNegative() { // отрицательный минимальный баланс - составлен баг репорт
         Assertions.assertThrows(java.lang.IllegalArgumentException.class, () -> {
             new SavingAccount(1_000, -1_000, 10_000, 5);
         });
     }
 
     @Test
-    public void maxBalanceDontShouldNegative() { // отрицательный максимальный баланс - БАГ
+    public void maxBalanceDontShouldNegative() { // отрицательный максимальный баланс - составлен баг репорт
         Assertions.assertThrows(java.lang.IllegalArgumentException.class, () -> {
             new SavingAccount(1_000, 1_000, -10_000, 5);
         });
@@ -50,7 +50,7 @@ public class SavingAccountTest {
     @Test
     public void initialBalanceDontShouldNegative() { // отрицательный начальный баланс - БАГ
         Assertions.assertThrows(java.lang.IllegalArgumentException.class, () -> {
-            new SavingAccount(-1_000, 1_000, -10_000, 5);
+            new SavingAccount(-1_000, 1_000, 10_000, 5);
         });
     }
 
@@ -139,7 +139,7 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void shouldAddLessThanMaxBalance() { // пополнение баланса на сумму меньше максимальной - БАГ РЕПОРТ
+    public void shouldAddLessThanMaxBalance() { // пополнение баланса на сумму меньше максимальной - составлен баг репорт
         SavingAccount account = new SavingAccount(
                 2_000,
                 1_000,
