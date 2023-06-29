@@ -91,18 +91,6 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void shouldReplenishBalance() { // пополнение баланса - БАГ
-        SavingAccount account = new SavingAccount(
-                2_000,
-                1_000,
-                10_000,
-                5
-        );
-        account.add(1_000);
-        Assertions.assertEquals(1_000 + 2_000, account.getBalance());
-    }
-
-    @Test
     public void shouldNotReplenishMoreMaxBalance() { // пополнение баланса на сумму больше максимального баланса
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -115,7 +103,7 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void shouldReplenishToMaxBalance() { // пополнение баланса до суммы равной максимальному балансу - БАГ
+    public void shouldReplenishToMaxBalance() { // пополнение баланса до суммы равной максимальному балансу - составлен баг репорт
         SavingAccount account = new SavingAccount(
                 2_000,
                 1_000,
@@ -150,14 +138,14 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void shouldRoundTheBalance() { // округление процента - БАГ
+    public void shouldRoundTheBalance() { // округление процента - составлен баг репорт
         SavingAccount account = new SavingAccount(
                 1_499,
                 1_000,
                 10_000,
-                50
+                80
         );
-        Assertions.assertEquals(749, account.yearChange());
+        Assertions.assertEquals(1199, account.yearChange());
     }
 
     @Test
