@@ -67,7 +67,7 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void paymentShouldNotThrough() { // сумма оплаты больше баланса, после оплаты баланс меньше минимального баланса - БАГ
+    public void paymentShouldNotThrough() { // сумма оплаты больше баланса, после оплаты баланс меньше минимального баланса - составлен баг репорт
         SavingAccount account = new SavingAccount(
                 3_000,
                 1_000,
@@ -99,7 +99,7 @@ public class SavingAccountTest {
                 5
         );
         account.pay(1_500);
-        Assertions.assertEquals(1_000, account.getBalance());
+        Assertions.assertEquals(2_000, account.getBalance());
     }
 
     @Test
