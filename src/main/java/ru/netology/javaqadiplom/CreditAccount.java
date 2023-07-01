@@ -5,7 +5,7 @@ package ru.netology.javaqadiplom;
  * Может иметь баланс вплоть до отрицательного, но до указанного кредитного лимита.
  * Имеет ставку - количество процентов годовых на сумму на балансе, если она меньше нуля.
  */
-public class    CreditAccount extends Account {
+public class CreditAccount extends Account {
     protected int creditLimit;
 
     /**
@@ -21,6 +21,11 @@ public class    CreditAccount extends Account {
         if (rate <= 0) {
             throw new IllegalArgumentException(
                     "Накопительная ставка не может быть отрицательной, а у вас: " + rate
+            );
+        }
+        if (creditLimit < 0) {
+            throw new IllegalArgumentException(
+                    "Кредитный лимит не может быть отрицательным, а у вас: " + creditLimit
             );
         }
         this.balance = initialBalance;
@@ -51,9 +56,9 @@ public class    CreditAccount extends Account {
             balance -= amount;
             return true;
 
-            }
-            return false;
         }
+        return false;
+    }
 
 
     /**
