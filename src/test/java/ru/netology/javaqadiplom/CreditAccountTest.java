@@ -194,4 +194,13 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(15, account.getRate());
     }
+
+    @Test //Вывод ошибки при отрицательном кредитном лимите (Баг)
+    public void shouldThrowExceptionWhenInitialBalanceISNegative(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {new CreditAccount(
+                -1_000,
+                5_000,
+                15);
+        });
+    }
 }
