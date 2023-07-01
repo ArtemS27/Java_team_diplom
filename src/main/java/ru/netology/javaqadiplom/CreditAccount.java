@@ -19,7 +19,7 @@ public class    CreditAccount extends Account {
      */
     public CreditAccount(int initialBalance, int creditLimit, int rate) {
         if (rate <= 0) {
-        throw new IllegalArgumentException(
+            throw new IllegalArgumentException(
                     "Накопительная ставка не может быть отрицательной, а у вас: " + rate
             );
         }
@@ -46,10 +46,15 @@ public class    CreditAccount extends Account {
         if (balance - amount >= -creditLimit) {
             balance -= amount;
             return true;
-        } else {
+        }
+            if (balance - amount > -creditLimit) {
+                balance -= amount;
+                return true;
+
+            }
             return false;
         }
-    }
+
 
     /**
      * Операция пополнения карты на указанную сумму.
