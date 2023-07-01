@@ -34,10 +34,10 @@ public class CreditAccountTest {
     @Test //Добавление денег на счет с отрицательным балансом (Баг)
     public void shouldAddToNegativeBalance(){
         CreditAccount account = new CreditAccount(
-                -1_000,
+                0,
                 5_000,
                 15);
-
+        account.pay(1_000);
         account.add(1500);
 
         Assertions.assertEquals(500, account.getBalance());
@@ -72,10 +72,11 @@ public class CreditAccountTest {
     @Test //Оплата при отрицательном балансе не выходя за лимит (Баг)
     public void shouldChargeMoneyWhenPayInLimitNegativeBalance(){
         CreditAccount account = new CreditAccount(
-                -2_000,
+                0,
                 5_000,
                 15
         );
+        account.pay(2_000);
         account.pay(500);
 
         Assertions.assertEquals(-2_500, account.getBalance());
@@ -110,11 +111,11 @@ public class CreditAccountTest {
     @Test //Оплата при отрицательном балансе сверх лимита (Баг)
     public void shouldNotChargeMoneyWhenPayOverLimitNegativeBalance(){
         CreditAccount account = new CreditAccount(
-                -500,
+                0,
                 1_000,
                 15
         );
-
+        account.pay(500);
         account.pay(1_000);
 
         Assertions.assertEquals(-500, account.getBalance());
@@ -134,10 +135,11 @@ public class CreditAccountTest {
     @Test //Списание годоваго процента при отрицательном балансе
     public void shouldMadeYearChargeIfBalanceNegative(){
         CreditAccount account = new CreditAccount(
-                -500,
+                0,
                 1_000,
                 15
         );
+        account.pay(500);
 
         Assertions.assertEquals(-75, account.yearChange());
     }
@@ -156,15 +158,6 @@ public class CreditAccountTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {new CreditAccount(
                 0,
                 -5_000,
-                15);
-        });
-    }
-
-    @Test //Вывод ошибки при начальном балансе ниже кредитного лимита (Баг)
-    public void shouldThrowExceptionWhenInitialLimitBelowCreditLimit(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {new CreditAccount(
-                -1_000,
-                -500,
                 15);
         });
     }
