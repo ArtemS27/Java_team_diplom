@@ -113,7 +113,7 @@ public class SavingAccountTest {
         account.add(3_000);
         Assertions.assertEquals(5_000, account.getBalance());
     }
-
+  
     @Test
     public void shouldAddLessThanMaxBalance() { // пополнение баланса на сумму меньше максимальной - составлен баг репорт
         SavingAccount account = new SavingAccount(
